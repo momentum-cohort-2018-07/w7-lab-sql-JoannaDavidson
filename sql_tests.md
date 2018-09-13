@@ -29,8 +29,13 @@ For each of the questions below, add the following information to a Markdown fil
     * 500 rows returned.
         * NOTE: I thought about just SELECTing the worked_on and duration columns, but based on the instructions felt I should return the whole time_entries row adding the column for client name.
 * Find all developers in the "Ohio sheep" group.
-    * 
-    * 
+    * SELECT D.*, G.name
+    FROM groups G
+    JOIN group_assignments GA ON G.id = GA.group_id
+    JOIN developers D ON D.id = GA.developer_id
+    WHERE G.name = 'Ohio sheep';
+    * 3 rows returned
+        * NOTE: I started by getting the row for the group name, then looking through group assignments to developers. I think now, I could also have started from developers and worked the other direction and wonder if it's more appropriate to start with developers on the left since that's what I'm really trying to pull. Got the correct info either way, though.
 * Find the total number of hours worked for each client.
     * 
     * 
