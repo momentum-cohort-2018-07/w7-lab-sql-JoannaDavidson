@@ -76,11 +76,21 @@ Unless otherwise specified, return all columns in the requested table (e.g. deve
 Try these queries if you have time:
 
 * Find all developers with at least five comments.
-    *
-    *
+    *SELECT D.name,  COUNT(C.id) comment_count
+	FROM developers D
+	JOIN comments C ON C.developer_id = D.id
+	GROUP BY D.name
+	HAVING comment_count >= 5;
+    * 1 row: "Joelle Hermann"	"5"
 * Find the developer who worked the fewest hours in January of 2015.
-    *
-    *
+    *SELECT D.name, STRFTIME("%Y-%m", worked_on) month_worked, SUM(duration) total_hours
+	FROM developers D
+	LEFT JOIN time_entries TE ON D.id = TE.developer_id
+	WHERE month_worked = "2015-01"
+	GROUP BY D.name
+	ORDER BY total_hours ASC LIMIT 1;
+    * 1 row: "Ms. Tremayne Kuhn"	"2015-01"	"0"
+        * Again I wanted to use a MIN function somehow, but don't know how. Maybe I can't?
 * Find all time entries which were created by developers who were not assigned to that time entry's project.
     *
     *
