@@ -5,18 +5,29 @@
 For each of the questions below, add the following information to a Markdown file in your homework repo:
 
 * Find all time entries.
-    * SELECT * FROM time_entries;
+    * SELECT *
+    FROM time_entries;
     * 500 rows returned
 * Find the developer who joined most recently.
-    * SELECT * FROM developers ORDER BY joined_on DESC LIMIT 1;
+    * SELECT *
+    FROM developers
+    ORDER BY joined_on DESC
+    LIMIT 1;
     * "34"	"Dr. Danielle McLaughlin"	"shakira.carter@kohler.org"	"2015-07-10"	"2015-07-14 16:15:19.224045"	"2015-07-14 16:15:19.224045"
 * Find the number of projects for each client.
-    * SELECT *, COUNT(projects.id) AS num_of_projects FROM clients LEFT JOIN projects ON clients.id = projects.client_id GROUP BY clients.id;
+    * SELECT *, COUNT(projects.id) AS num_of_projects
+    FROM clients
+    LEFT JOIN projects ON clients.id = projects.client_id
+    GROUP BY clients.id;
     * 12 rows returned. 
         * NOTE: I originally started using JOIN, but then thought I should use LEFT JOIN to show clients who have no projects. For some reason, though, it took me a while to figure out to count projects.id not clients.id.
 * Find all time entries, and show each one's client name next to it.
-    * 
-    * 
+    * SELECT TE.*, C.name
+	FROM time_entries AS TE
+    JOIN projects AS P ON P.id = TE.project_id
+	JOIN clients AS C ON C.id = P.client_id;
+    * 500 rows returned.
+        * NOTE: I thought about just SELECTing the worked_on and duration columns, but based on the instructions felt I should return the whole time_entries row adding the column for client name.
 * Find all developers in the "Ohio sheep" group.
     * 
     * 
