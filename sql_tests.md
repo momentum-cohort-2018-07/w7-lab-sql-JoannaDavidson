@@ -56,8 +56,11 @@ For each of the questions below, add the following information to a Markdown fil
     * 1 row:  "Mrs. Lupe Schowalter"	"Kuhic-Bartoletti"	"11"
         * NOTE: I kept looking for a way to do this with MAX, but nothing was working for me. Not sure if there is a way without doing a subquery. Haven't found it yet.
 * List all client names with their project names (multiple rows for one client is fine).  Make sure that clients still show up even if they have no projects.
-    * 
-    * 
+    * SELECT C.name, P.name
+    FROM clients C
+    LEFT JOIN projects P ON C.id = P.client_id
+    ORDER BY C.name;
+    * 33 rows. 
 * Find all developers who have written no comments.
     * 
     * 
