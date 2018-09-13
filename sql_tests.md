@@ -11,8 +11,9 @@ For each of the questions below, add the following information to a Markdown fil
     * SELECT * FROM developers ORDER BY joined_on DESC LIMIT 1;
     * "34"	"Dr. Danielle McLaughlin"	"shakira.carter@kohler.org"	"2015-07-10"	"2015-07-14 16:15:19.224045"	"2015-07-14 16:15:19.224045"
 * Find the number of projects for each client.
-    * 
-    * 
+    * SELECT *, COUNT(projects.id) AS num_of_projects FROM clients LEFT JOIN projects ON clients.id = projects.client_id GROUP BY clients.id;
+    * 12 rows returned. 
+        * NOTE: I originally started using JOIN, but then thought I should use LEFT JOIN to show clients who have no projects. For some reason, though, it took me a while to figure out to count projects.id not clients.id.
 * Find all time entries, and show each one's client name next to it.
     * 
     * 
