@@ -37,8 +37,13 @@ For each of the questions below, add the following information to a Markdown fil
     * 3 rows returned
         * NOTE: I started by getting the row for the group name, then looking through group assignments to developers. I think now, I could also have started from developers and worked the other direction and wonder if it's more appropriate to start with developers on the left since that's what I'm really trying to pull. Got the correct info either way, though.
 * Find the total number of hours worked for each client.
-    * 
-    * 
+    * SELECT C.name, SUM(duration) total_hours
+	FROM time_entries AS TE
+    JOIN projects AS P ON P.id = TE.project_id
+	JOIN clients AS C ON C.id = P.client_id
+	GROUP BY C.name;
+    * 9 rows returned.
+        * NOTE: I just took the query from above getting the project for each client and added grouping and SUM.
 * Find the client for whom Mrs. Lupe Schowalter (the developer) has worked the greatest number of hours.
     * 
     * 
