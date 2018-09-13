@@ -62,8 +62,12 @@ For each of the questions below, add the following information to a Markdown fil
     ORDER BY C.name;
     * 33 rows. 
 * Find all developers who have written no comments.
-    * 
-    * 
+    * SELECT D.name,  COUNT(C.id) comment_count
+	FROM developers D
+	LEFT JOIN comments C ON C.developer_id = D.id
+	GROUP BY D.name
+	HAVING comment_count = 0;
+    * 13 rows. 
 
 Unless otherwise specified, return all columns in the requested table (e.g. developers).
 
