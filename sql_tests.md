@@ -38,15 +38,23 @@ For each of the questions below, add the following information to a Markdown fil
         * NOTE: I started by getting the row for the group name, then looking through group assignments to developers. I think now, I could also have started from developers and worked the other direction and wonder if it's more appropriate to start with developers on the left since that's what I'm really trying to pull. Got the correct info either way, though.
 * Find the total number of hours worked for each client.
     * SELECT C.name, SUM(duration) total_hours
-	FROM time_entries AS TE
-    JOIN projects AS P ON P.id = TE.project_id
-	JOIN clients AS C ON C.id = P.client_id
+	FROM time_entries TE
+    JOIN projects P ON P.id = TE.project_id
+	JOIN clients C ON C.id = P.client_id
 	GROUP BY C.name;
     * 9 rows returned.
         * NOTE: I just took the query from above getting the project for each client and added grouping and SUM.
 * Find the client for whom Mrs. Lupe Schowalter (the developer) has worked the greatest number of hours.
-    * 
-    * 
+    * SELECT D.name, C.name, SUM(duration) total_client_hours
+	FROM developers D
+	JOIN time_entries TE ON D.id = TE.developer_id
+	JOIN projects P ON P.id = TE.project_id
+	JOIN clients C ON C.id = P.client_id
+	WHERE D.name = 'Mrs. Lupe Schowalter'
+	GROUP BY C.name
+	ORDER BY total_client_hours DESC LIMIT 1;
+    * 1 row:  "Mrs. Lupe Schowalter"	"Kuhic-Bartoletti"	"11"
+        * NOTE: I kept looking for a way to do this with MAX, but nothing was working for me. Not sure if there is a way without doing a subquery. Haven't found it yet.
 * List all client names with their project names (multiple rows for one client is fine).  Make sure that clients still show up even if they have no projects.
     * 
     * 
